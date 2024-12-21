@@ -3,5 +3,13 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
+    ],
+    "cSpell.words": [
+        "chuỗi",
+        "Chuyển",
+        "kiếm",
+        "loại",
+        "thành",
+        "thường"
     ]
 }

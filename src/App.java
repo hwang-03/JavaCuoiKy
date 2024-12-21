@@ -1,7 +1,8 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import manager.StudentManager;
 import models.Student;
 import utils.MenuUtil;
@@ -29,19 +30,21 @@ public class App {
                     System.out.println("Enter a number form 1 to 7.");
                 }
             } while ((i < 1) || (i > 7));
-
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             switch (i) {
                 case 1 -> studentManager.addStudent();
                 case 2 -> studentManager.displayStudents();
                 case 3 -> studentManager.updateStudent(students, null);
                 case 4 -> studentManager.removeStudent(students);
                 case 5 -> {
-                    String search = Validator.getString(scanner, "Enter ID or Name for search: ");
+                    System.out.print("Enter ID or Name for search: ");
+                    String search = br.readLine().trim();
                     studentManager.searchStudentByIdOrName(search);
                 }
                 case 6 -> studentManager.shelfStudent();
                 case 7 -> System.out.println("You are exit!");
             }
         } while (i != 7);
+        scanner.close();
     }
 }

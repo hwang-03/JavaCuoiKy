@@ -1,5 +1,4 @@
 package utils;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -54,7 +53,7 @@ public class Validator {
 
     public static String getString(Scanner scanner, String prompt) {
         System.out.print(prompt);
-        return scanner.next().trim();
+        return scanner.nextLine().trim();
     }
 
     public static float getGPA(Scanner scanner, String prompt) {
@@ -73,24 +72,5 @@ public class Validator {
             }
         }
         return gpa;
-    }
-
-    // Phương thức nhập tuổi
-    public static int getAge(Scanner scanner, String prompt) {
-        int age = -1;
-        while (age <= 0) {
-            System.out.print(prompt);
-            try {
-                age = scanner.nextInt();
-                scanner.nextLine();
-                if (age <= 0) {
-                    System.out.println("Age must be a positive number.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
-                scanner.nextLine();
-            }
-        }
-        return age;
     }
 }

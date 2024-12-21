@@ -2,7 +2,14 @@ package manager;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 import models.Student;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -16,24 +23,40 @@ public class StudentManager {
         this.students = students;
     }
 
-    // Tìm kiếm
-    public void searchStudentByIdOrName(String search) {
-        search = search.toLowerCase();
+    public void searchStudentByIdOrName(String search2) {
+        if (search2 == null || search2.trim().isEmpty()) {
+            System.out.println("Search term cannot be empty.");
+            return;
+        }
+    
+        String search = removeDiacritics(search2.toLowerCase().trim());
         int d = 0;
+    
         for (Student student : students) {
-            String id = student.getId().toLowerCase();
-            String name = student.getName().toLowerCase();
-            if ((id.contains(search)) || (name.contains(search))) {
+            if (student == null) continue;
+    
+            String id = student.getId() != null ? removeDiacritics(student.getId().toLowerCase()) : "";
+            String name = student.getName() != null ? removeDiacritics(student.getName().toLowerCase()) : "";
+    
+            if (id.contains(search) || name.contains(search)) {
                 student.printStudent();
                 d++;
             }
         }
+    
         if (d == 0) {
-            System.out.println("No Matching result was found");
+            System.out.println("No matching result was found.");
         } else {
-            System.out.printf("There are %d results were found\n", d);
+            System.out.printf("There are %d results found\n", d);
         }
     }
+    
+
+private String removeDiacritics(String input) {
+    String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
+    Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+    return pattern.matcher(temp).replaceAll("");
+}
 
     // thêm sinh viên
     public void addStudent() {
@@ -59,7 +82,7 @@ public class StudentManager {
             return;
         }
         studentToUpdate.inputInformationUpdate(scanner);
-        scanner.close();
+        // scanner.close();
     }
 
     // Hiển thị sinh viên
@@ -93,7 +116,7 @@ public class StudentManager {
         }
         students.remove(studentToRemove);
         System.out.println("Student with ID " + id + " has been successfully removed.");
-        scanner.close();
+        // scanner.close();
     }
 
     public void shelfStudent() {

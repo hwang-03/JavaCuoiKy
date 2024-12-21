@@ -134,9 +134,9 @@ public class Student {
                 }
             }
         } while (!isValid);
-
         this.name = Validator.getString(scanner, "Name: ");
         this.age = Validator.getInt(scanner, "Age: ");
+        scanner.nextLine();
         this.gender = Validator.getString(scanner, "Gender: ");
         this.dob = Validator.getString(scanner, "Dob: ");
         this.address = Validator.getString(scanner, "Address: ");
@@ -146,7 +146,7 @@ public class Student {
 
     public void inputInformationUpdate(Scanner scanner) {
         setName(Validator.getString(scanner, "Enter new name: "));
-        setAge(Validator.getAge(scanner, "Enter new age: "));
+        setAge(Validator.getInt(scanner, "Enter new age: "));
         setGender(Validator.getString(scanner, "Enter new gender: "));
         setDob(Validator.getString(scanner, "Enter new date of birth (dd/mm/yyyy): "));
         setAddress(Validator.getString(scanner, "Enter new address: "));
