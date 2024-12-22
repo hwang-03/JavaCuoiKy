@@ -147,6 +147,7 @@ public class Student {
     public void inputInformationUpdate(Scanner scanner) {
         setName(Validator.getString(scanner, "Enter new name: "));
         setAge(Validator.getInt(scanner, "Enter new age: "));
+         scanner.nextLine();
         setGender(Validator.getString(scanner, "Enter new gender: "));
         setDob(Validator.getString(scanner, "Enter new date of birth (dd/mm/yyyy): "));
         setAddress(Validator.getString(scanner, "Enter new address: "));
